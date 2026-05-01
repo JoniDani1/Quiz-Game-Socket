@@ -23,4 +23,4 @@ A terminal-based multiplayer quiz game built with Python sockets. This project u
 - **Dev Musk**
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
