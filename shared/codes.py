@@ -18,6 +18,8 @@ def code_to_ip(code):
         code += '=' * (4 - len(code) % 4)
         code = code.replace('-', '+').replace('_', '/')
         ip_bytes = base64.b64decode(code)
+        if len(ip_bytes) != 4:
+            return None
         return '.'.join(str(b) for b in ip_bytes)
     except:
         return None

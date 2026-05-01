@@ -38,10 +38,18 @@ def run_player():
         return
     
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.settimeout(5)
+    
     try:
+        print("Connecting to room...")
         sock.connect((target_ip, 55555))
+        sock.settimeout(None)
+    except socket.timeout:
+        print("Error: Connection timed out. Is the code correct?")
+        time.sleep(2)
+        return
     except:
-        print("Couldn't connect.")
+        print("Error: Could not connect to the room.")
         time.sleep(2)
         return
 
