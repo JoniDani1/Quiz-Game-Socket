@@ -2,6 +2,7 @@ import socket
 import json
 import time
 from shared.utils import print_banner
+from shared.codes import code_to_ip
 
 def listen_to_server(s):
     while True:
@@ -28,7 +29,13 @@ def run_player():
     import threading
     print_banner()
     print(">>> JOIN <<<")
-    target_ip = input("Host IP: ")
+    code = input("Enter Room Code: ")
+    target_ip = code_to_ip(code)
+    
+    if not target_ip:
+        print("Invalid code!")
+        time.sleep(2)
+        return
     
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
