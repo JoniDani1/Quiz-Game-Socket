@@ -7,8 +7,8 @@ def ip_to_code(ip):
         if len(parts) != 4: return "INVALID"
         
         ip_bytes = bytes([int(p) for p in parts])
-        code = base64.b64encode(ip_bytes).decode('utf-8')
-        code = code.replace('=', '').replace('+', '-').replace('/', '_')
+        code = base64.b64encode(ip_bytes).decode('utf-8') # Convert IP bytes to Base64 text
+        code = code.replace('=', '').replace('+', '-').replace('/', '_') # Sanitize for URL safety
         return code
     except:
         return "ERROR"
@@ -16,8 +16,8 @@ def ip_to_code(ip):
 def code_to_ip(code):
     try:
         code += '=' * (4 - len(code) % 4)
-        code = code.replace('-', '+').replace('_', '/')
-        ip_bytes = base64.b64decode(code)
+        code = code.replace('-', '+').replace('_', '/') # Revert sanitation
+        ip_bytes = base64.b64decode(code) # Convert Base64 text back to IP bytes
         if len(ip_bytes) != 4:
             return None
         return '.'.join(str(b) for b in ip_bytes)

@@ -15,7 +15,7 @@ round_count = 0
 game_locked = False
 
 def broadcast(msg_dict, exclude_sock=None):
-    data = json.dumps(msg_dict).encode('utf-8')
+    data = json.dumps(msg_dict).encode('utf-8') # convert to JSON and encode to binary
     for c in clients[:]:
         if c == exclude_sock:
             continue
@@ -51,7 +51,7 @@ def handle_client(sock, addr):
                 return
         
         sock.send(json.dumps({"type": "name_req", "msg": "Username: "}).encode('utf-8'))
-        name = sock.recv(1024).decode('utf-8')
+        name = sock.recv(1024).decode('utf-8') # 1KB buffer, decode to text
         if not name:
             name = f"Guest{addr[1]}"
         
@@ -72,11 +72,11 @@ def handle_client(sock, addr):
 
         while is_server_running:
             try:
-                raw_data = sock.recv(1024)
+                raw_data = sock.recv(1024) # 1KB buffer
                 if not raw_data:
                     break
                 
-                msg = json.loads(raw_data.decode('utf-8'))
+                msg = json.loads(raw_data.decode('utf-8')) # Decode binary to text
                 
                 global current_answer, round_count
                 txt = msg.get("msg", "")
@@ -128,7 +128,7 @@ def start_listening(ip, port):
         while is_server_running:
             try:
                 conn, addr = server_socket.accept()
-                threading.Thread(target=handle_client, args=(conn, addr), daemon=True).start()
+                threading.Thread(target=handle_client, args=(conn, addr), daemon=True).start() # daemon=True auto-kills on exit
             except:
                 break
     except Exception as e:
@@ -213,7 +213,7 @@ def run_host():
     print(f"YOUR ROOM CODE: {GREEN}{room_code}{RESET}")
     print(f"(Local IP: {lan_ip})")
     
-    threading.Thread(target=start_listening, args=("0.0.0.0", 55555), daemon=True).start()
+    threading.Thread(target=start_listening, args=("0.0.0.0", 55555), daemon=True).start() # 55555 is private port, daemon=True auto-kills
     time.sleep(1)
     
     while is_server_running:

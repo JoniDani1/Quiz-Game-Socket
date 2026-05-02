@@ -7,12 +7,13 @@ from shared.codes import code_to_ip
 def listen_to_server(s):
     while True:
         try:
-            data = s.recv(1024)
+            data = s.recv(1024) # 1KB buffer
             if not data:
                 print("\nLost connection.")
                 break
             
-            res = json.loads(data.decode('utf-8'))
+            res = json.loads(data.decode('utf-8')) # Decode binary to text
+
             
             if res.get("type") == "error":
                 print(f"\nError: {res['msg']}")
@@ -56,16 +57,16 @@ def run_player():
     name = ""
     try:
         while True:
-            raw = sock.recv(1024)
+            raw = sock.recv(1024) # 1KB buffer size 
             if not raw: return
-            res = json.loads(raw.decode('utf-8'))
+            res = json.loads(raw.decode('utf-8')) # Decode binary to text
             
             if res.get("type") == "auth_req":
                 pw = input(res["msg"])
-                sock.send(pw.encode('utf-8'))
+                sock.send(pw.encode('utf-8')) # Encode text to binary
             elif res.get("type") == "name_req":
                 name = input(res["msg"])
-                sock.send(name.encode('utf-8'))
+                sock.send(name.encode('utf-8')) # Encode text to binary
                 break
             elif res.get("type") == "error":
                 print(f"\n{res['msg']}")
@@ -76,7 +77,7 @@ def run_player():
         sock.close()
         return
 
-    threading.Thread(target=listen_to_server, args=(sock,), daemon=True).start()
+    threading.Thread(target=listen_to_server, args=(sock,), daemon=True).start() # args=(sock,) is a tuple, daemon=True auto-kills on exit
     
     print("\nConnected! Type /leave to quit.")
 
@@ -90,7 +91,7 @@ def run_player():
             break
         
         try:
-            sock.send(json.dumps({"player": name, "msg": txt}).encode('utf-8'))
+            sock.send(json.dumps({"player": name, "msg": txt}).encode('utf-8')) # send as JSON string
         except:
             break
 
