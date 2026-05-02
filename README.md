@@ -1,6 +1,6 @@
 # Quiz Game Socket
 
-A terminal-based multiplayer quiz game built with Python sockets. This project uses a single unified script for both hosting and joining games. One player acts as the host (question asker), and up to 5 others join as contestants to answer questions and compete for points.
+A multiplayer quiz game built with Python sockets. This project uses a single unified script for both hosting and joining games. One player acts as the host (question asker), and up to 5 others join as contestants to answer questions and compete for points.
 
 ## How to Play
 
