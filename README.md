@@ -21,7 +21,7 @@ A terminal-based multiplayer quiz game built with Python sockets. This project u
 ## Authors
 - [<img src="https://github.com/JoniDani1.png" width="25" height="25"> **Joni Dani**](https://github.com/JoniDani1)
 - [<img src="https://github.com/yigit-guven.png" width="25" height="25"> **Yiğit Güven**](https://github.com/yigit-guven)
-- **Dev Musk**
+- [<img src="https://github.com/thenextstark.png" width="25" height="25"> **Dev Dubey**](https://github.com/thenextstark)
 
 ## License
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
